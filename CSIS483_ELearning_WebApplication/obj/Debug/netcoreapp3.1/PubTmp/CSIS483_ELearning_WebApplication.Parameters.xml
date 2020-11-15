@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="CSIS483ELearningWebApplication20201106193453" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Nicholas\ Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\obj\\Debug\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

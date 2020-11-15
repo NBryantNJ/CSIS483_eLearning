@@ -1,0 +1,235 @@
+﻿/*----------------------Locked out div----------------------------*/
+.divLockedOut
+{
+	position:relative; left:50%; width:600px; height:260px; 
+	transform:translate(-50%);
+	margin-top:100px; 
+	background-color:white; 
+	box-shadow:0px 2px 2px #aaa;
+	padding:30px; 
+	text-align:center;
+	letter-spacing:2px;
+}
+
+.divLockedOut img
+{
+	position:relative; height:50px;
+	margin-top:25px;
+}
+
+.divLockedOut button
+{
+	position:absolute; left:50%; width:250px;
+	transform:translate(-50%);
+	margin-top:110px;
+	letter-spacing:2px;
+}
+
+/*----------------------Unlocked div-------------------------*/
+.divUnlocked {
+	position: relative;
+	left: 50%;
+	width: 1300px;
+	height: 590px;
+	transform: translate(-50%);
+	margin-top: 100px;
+	background-color: white;
+	box-shadow: 0px 2px 2px #aaa;
+	padding: 30px;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.divUnlocked p
+{
+	margin-top:20px; 
+}
+
+.divUnlocked button {
+	width: 650px;
+	height:80px; 
+	margin-top: 50px;
+	letter-spacing: 2px;
+	font-size:20px; 
+}
+
+/*---------------------------Create Courses---------------------------------*/
+.divCreateCourse {
+	position: relative;
+	left: 50%;
+	width: 1300px;
+	height: 2170px;
+	top: -690px;
+	transform: translate(-50%);
+	margin-top: 100px;
+	background-color: white;
+	box-shadow: 0px 2px 2px #aaa;
+	padding: 30px;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+/*Links div*/
+.divLinks
+{
+	position:relative; height:180px; width:100%; 
+	overflow-y:scroll;
+	margin-bottom:20px!important;
+}
+
+.divLinks .form-control {
+	display: inline-block !important;
+	width: 440px !important;
+	margin-top:20px!important;
+}
+
+.divLinks button
+{
+	position:fixed; top:259px; left:1100px;
+	letter-spacing:2px;
+}
+
+/*Add test questions div*/
+.divAddTestingQuestions
+{
+	position:relative; height:950px;
+	overflow-y:scroll;
+	margin-top:20px; 
+}
+
+.divAddTestingQuestions .form-control
+{
+	margin-top:40px!important; 
+	width:400px!important;
+	margin-left:20px!important;
+}
+
+.divAddTestingQuestions select 
+{
+	position:relative; top:-78px;
+	display:inline-block!important;
+
+}
+
+.divAddTestingQuestions button
+{
+	position:fixed; top:1063px; left:1100px;
+	letter-spacing:2px;
+}
+
+/*Difficulty rating*/
+.divCourseDifficultyRating h4
+{
+	margin-bottom:40px; 
+}
+
+.divCourseDifficultyRating button {
+	position: relative;
+	width: 300px;
+	height: 50px;
+	left: 50%;
+	transform: translate(-50%);
+	margin-top: 15px;
+	font-size: 18px;
+	letter-spacing: 2px;
+	display: block;
+	opacity:.5;
+}
+
+/*Course name and submission*/
+.divCourseName {
+	position:relative; top:15px;
+}
+
+.divCourseName .form-control
+{
+	margin-top:90px!important;
+}
+
+.divCourseName button
+{
+	position:relative; left:495px; width:250px; height:50px;
+	margin-top:100px;
+	font-size:16px;
+	letter-spacing:2px;
+}
+
+/*------------------------Assign Courses----------------------------------*/
+.divStudentCourseAssigner {
+	position: fixed;
+	left: 50%;
+	width: 1300px;
+	height: 690px;
+	top: 62px;
+	transform: translate(-50%);
+	margin-top: 100px;
+	background-color: white;
+	box-shadow: 0px 2px 2px #aaa;
+	padding: 30px;
+	text-align: left;
+	letter-spacing: 2px;
+	visibility: hidden;
+}
+
+/*Top & Bottom divider*/
+.divCourseAssignerTopDivider, .divCourseAssignerBottomDivider 
+{
+	height: 270px;
+	overflow-y: scroll;
+}
+
+.divStudentCourseAssigner input {
+	position: relative;
+	left: 30px;
+}
+
+.divStudentCourseAssigner label{
+	position:relative; left:38px; 
+}
+
+.divStudentCourseAssigner span
+{
+	display:block;
+}
+
+.divStudentCourseAssigner button
+{
+	position:relative; left:50%; 
+	transform:translate(-50%);
+	width:250px;
+	letter-spacing:2px;
+}
+
+/*-----------------------View Student Reports-----------------------------------*/
+.divStudentGradeChecker {
+	position: fixed;
+	left: 50%;
+	width: 1300px;
+	height: 690px;
+	top: 62px;
+	transform: translate(-50%);
+	margin-top: 100px;
+	background-color: white;
+	box-shadow: 0px 2px 2px #aaa;
+	padding: 30px;
+	text-align: center;
+	letter-spacing: 2px;
+	overflow-y: scroll;
+	visibility: hidden;
+}
+.divStudentGradeChecker input
+{
+	position:relative;
+	width:700px!important;
+	left:50%; 
+	transform:translate(-50%);
+	margin-top:45px; 
+	text-align:center;
+}
+
+.divStudentGradeChecker button {
+	width: 250px;
+	margin-top: 45px;
+	letter-spacing: 2px;
+	margin-bottom:10px; 
+}

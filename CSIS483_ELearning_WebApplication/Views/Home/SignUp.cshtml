@@ -1,0 +1,42 @@
+﻿@{ 
+    ViewData["Title"] = "Sign up";
+}
+<head>
+    <!--CSS Files-->
+    <link href="~/css/Signup/SignupLarge.css" rel="stylesheet" />
+</head>
+
+<!--Sign up form-->
+<div class="loginPageMainDiv">
+    <h4>Please sign up below</h4>
+    <hr />
+    <p>First Name</p>
+    <input type="text" class="form-control inputFirstName" />
+    <p>Last Name</p>
+    <input type="text" class="form-control inputLastName" />
+    <p>Email</p>
+    <input type="text" class="form-control inputEmail"/>
+    <p>Username</p>
+    <input type="text" class="form-control inputUsername" />
+    <p>Password</p>
+    <input type="password" class="form-control inputPassword" />
+    <button class="btn btn-dark btnSignUp">Sign Up</button>
+</div>
+
+<!--Loading Gif-->
+<img class="loadingGif" src="~/Images/loading.gif" />
+
+<!--Dimmer-->
+<div class="divSignUpDimmer"></div>
+
+
+<!--Error box-->
+<div class="divErrorBox">
+    <h5>Please correct the following</h5>
+    <hr />
+</div>
+
+
+
+<!--js File Reference-->
+<script src="~/js/signUp.js"></script>

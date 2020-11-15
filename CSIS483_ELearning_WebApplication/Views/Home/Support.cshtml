@@ -1,0 +1,64 @@
+﻿@model CSIS483_ELearning_WebApplication.Models.SessionModel 
+
+@{
+    ViewData["Title"] = "Support";
+}
+
+<head>
+    <link href="~/css/Support/SupportLarge.css" rel="stylesheet" />
+</head>
+
+<!--Support Contact Form-->
+<div class="supportContactForm">
+    <h4>Contact the developer</h4>
+    <hr />
+    <!--Left half div-->
+    <div class="leftDivideDiv">
+        <p>First Name<span>*</span></p>
+        <input type="text" class="form-control inputFirstName" value="@Model.firstName"/>
+        <p>Email<span>*</span></p>
+        <input type="text" class="form-control inputEmail" value="@Model.email"/>
+        <p>Reason for contacting<span>*</span></p>
+        <select class="form-control inputSelectReason">
+            <option selected hidden></option>
+            <option>Forgot password</option>
+            <option>Report a technical issue</option>
+            <option>Recommend additional features</option>
+            <option>Request admin privileges</option>
+            <option>Other</option>
+        </select>
+    </div>
+    <!--Right half div-->
+    <div class="rightDivideDiv">
+        <p>Last Name<span>*</span></p>
+        <input type="text" class="form-control inputLastName" value="@Model.lastName"/>
+        <p>Username</p>
+        <input type="text" class="form-control inputUsername" value="@Model.username"/>
+    </div>
+
+    <p class="pAddDetails">Additional Details</p>
+    <textarea class="form-control textAreaMoreInfo"></textarea>
+    <button class="btn btn-primary btnSubmitData"><p>SEND</p></button>
+    <img class="loadingGif" src="~/Images/loading.gif" />
+</div>
+
+<!------------------Email pop up--------------------->
+<div class="emailBackgroundDimmmer"></div>
+
+
+<!--Your email has been sent pop up-->
+<div class="emailSentPopUp">
+    <h4>Your email is on the way</h4>
+    <hr />
+    <p>Thank you someone will reach out to you shortly.</p>
+    <img src="~/Images/mailSent.png" />
+    <button class="btn btn-dark btnCloseOut">Close</button>
+</div>
+
+<!--Error box-->
+<div class="divErrorBox">
+    <h5>Please correct the following</h5>
+    <hr />
+</div>
+
+<script src="~/js/Support.js"></script>
