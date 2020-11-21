@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using System.Text.Json;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CSIS483_ELearning_WebApplication.Controllers
 {
@@ -30,12 +31,33 @@ namespace CSIS483_ELearning_WebApplication.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<getAssignedCoursesModel> getassignedcoursesmodel = new List<getAssignedCoursesModel>(); 
+            if (HttpContext.Session.GetString("username") != null)
+            {
+                MiscFunctions.getAssignedCourses getAssignedCourses = new MiscFunctions.getAssignedCourses();
+                getassignedcoursesmodel = getAssignedCourses.getCurrentAssignedCourses(HttpContext.Session.GetString("username")); 
+                return View(getassignedcoursesmodel);
+            }
+            else
+            {
+                return View(getassignedcoursesmodel);
+            }
         }
 
         public IActionResult Reports()
         {
-            return View();
+            //Get testing report if signed in
+            List<RetrieveUsersReportModel> retrieveuserreportModel = new List<RetrieveUsersReportModel>();
+            if (HttpContext.Session.GetString("username") != null)
+            {
+                adminControls.adminFunctions admincontrols = new adminControls.adminFunctions();
+                retrieveuserreportModel = admincontrols.retrieveUsersReport(HttpContext.Session.GetString("username"));
+                return View(retrieveuserreportModel);
+            }
+            else
+            {
+                return View(retrieveuserreportModel); 
+            }
         }
 
         public IActionResult Admin()
@@ -47,11 +69,13 @@ namespace CSIS483_ELearning_WebApplication.Controllers
             {
                 string username = HttpContext.Session.GetString("username");
                 string password = HttpContext.Session.GetString("password");
-                adminmodel.doesUserHaveAdminPrivileges = admincontrols.checkAdminPrivileges(username, password);
+                adminmodel = admincontrols.checkAdminPrivileges(username, password);
+
             }
             else
             {
                 adminmodel.doesUserHaveAdminPrivileges = false;
+                adminmodel.didUserRequestAdminPrivileges = false;
             }
             //Return username 
             adminControls.adminFunctions adminfunction = new adminControls.adminFunctions();
@@ -60,11 +84,39 @@ namespace CSIS483_ELearning_WebApplication.Controllers
             return View(adminmodel);
         }
 
-        //--------------------test function---------------------------
+        //-------------------Request Access---------------------------------
+        public bool requestAdminPrivileges(bool didUserRequestAccess)
+        {
+            if(HttpContext.Session.GetString("username") != null)
+            {
+                adminControls.adminFunctions adminfunction = new adminControls.adminFunctions();
+                return adminfunction.requestAdminPrivileges(didUserRequestAccess, HttpContext.Session.GetString("username"), HttpContext.Session.GetString("password"));
+            }
+            else
+            {
+                return false; 
+            }
+        }
+
+        //--------------------Submit a new course---------------------------
         public bool submitNewCourse(createACourseModel[] createcoursemodel)
         {
             adminControls.adminFunctions adminfunctions = new adminControls.adminFunctions();
             return adminfunctions.submitNewCourse(createcoursemodel); 
+        }
+
+        //------------------Assign courses to users-------------------------
+        public bool assignCoursesToUsers(assignCourseModel[] assigncoursemodel)
+        {
+            adminControls.adminFunctions adminfunctions = new adminControls.adminFunctions();
+            return adminfunctions.assignCourses(assigncoursemodel);
+        }
+
+        //------------------Get users report-------------------------
+        public List<RetrieveUsersReportModel> retreieveUsersReport(string username)
+        {
+            adminControls.adminFunctions adminfunctions = new adminControls.adminFunctions();
+            return adminfunctions.retrieveUsersReport(username); 
         }
 
 
@@ -163,9 +215,23 @@ namespace CSIS483_ELearning_WebApplication.Controllers
             return returnValue;
         }
 
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        //----------------------Course content page--------------------------------------------
+        public IActionResult CourseContent()
+        {
+            return View(); 
+        }
+
+        //---------------------Course Testing Page--------------------------------------------
+        public IActionResult TakeTest()
+        {
+            return View(); 
         }
 
         //----------------------Shared Layout Functions----------------------------------------
@@ -230,9 +296,18 @@ namespace CSIS483_ELearning_WebApplication.Controllers
                 return "System Error";
             }
 
-
-
         }
+
+        //Logout
+        public bool logout()
+        {
+            HttpContext.Session.Clear();
+            return true;
+        }
+
+
+
+
     }
 
 }

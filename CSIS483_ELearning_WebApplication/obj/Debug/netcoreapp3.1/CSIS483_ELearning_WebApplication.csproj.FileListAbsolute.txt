@@ -101,7 +101,6 @@ C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_E
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\Reports.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\SignUp.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\Support.cshtml.g.cs
-C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Misc\test.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -832,3 +831,5 @@ E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebA
 E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\CSIS483_ELearning_WebApplication.dll
 E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\CSIS483_ELearning_WebApplication.pdb
 E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\CSIS483_ELearning_WebApplication.genruntimeconfig.cache
+C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\courseContent.cshtml.g.cs
+C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\TakeTest.cshtml.g.cs

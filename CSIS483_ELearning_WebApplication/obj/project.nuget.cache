@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z8nkDQjzxgB/hwdks9Z8Duh1XCr6B3p1nZneEzJhlPZ02S5yezSx8VZAppqRIRnnt2PfF0vR3Kna/KAmWGoW3w==",
+  "dgSpecHash": "8T+V8yVGyDBBut8IHBED+CfzvM2tGaV7akmjS6nOZtSX5/eSxY0xgcgtxVjs7Y6zH2KbOGf7ujHUeq1ZpSsBrQ==",
   "success": true,
-  "projectFilePath": "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
+  "projectFilePath": "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",

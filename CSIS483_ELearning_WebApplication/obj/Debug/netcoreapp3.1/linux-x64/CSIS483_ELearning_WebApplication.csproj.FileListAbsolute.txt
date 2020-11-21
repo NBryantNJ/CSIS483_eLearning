@@ -364,7 +364,6 @@ C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_E
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\SshNet.Security.Cryptography.dll
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\System.Xml.XPath.XmlDocument.dll
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\linux-x64\Razor\Views\Home\SignUp.cshtml.g.cs
-C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\linux-x64\Razor\Views\Misc\test.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\aws-beanstalk-tools-defaults.json
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\refs\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\refs\Microsoft.Extensions.Options.dll
@@ -374,3 +373,5 @@ C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_E
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\Nancy.dll
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\Newtonsoft.Json.dll
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\bin\Debug\netcoreapp3.1\linux-x64\WebApiContrib.Formatting.JavaScriptSerializer.dll
+C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\linux-x64\Razor\Views\Home\CourseContent.cshtml.g.cs
+C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\linux-x64\Razor\Views\Home\TakeTest.cshtml.g.cs

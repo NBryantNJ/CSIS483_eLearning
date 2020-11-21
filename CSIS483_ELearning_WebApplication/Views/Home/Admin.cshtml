@@ -1,4 +1,5 @@
-﻿@model CSIS483_ELearning_WebApplication.Models.AdminModel
+﻿@using Microsoft.AspNetCore.Http;
+@model CSIS483_ELearning_WebApplication.Models.AdminModel
 
 @{
     ViewData["Title"] = "Admin";
@@ -16,128 +17,147 @@
             <h5>You don't have access to this page.</h5>
             <hr />
             <img src="~/Images/lockedPhoto.png" />
-            <button class="btn btn-dark btnRequestAdminAccess">Request Access</button>
+            @if (Model.didUserRequestAdminPrivileges == false) //If no admin priv
+             {
+                if (Context.Session.GetString("username") != null) //If no admin priv + logged in
+                {
+                    <button class="btn btn-dark btnRequestAdminAccess">Request Access</button>
+                }
+                else //If no admin priv and not logged in
+                {
+                    <button class="btn btn-dark divLogin" style="top:110px!important;">Request Access</button>
+                }
+            }
+            else
+            {
+                <button class="btn btn-info">Pending Review</button>
+            }
         </div>
     </text>
 }
 else
 {
 
-<div class="divUnlocked">
-    <h5>Welcome Back</h5>
-    <p>Select a choice below to begin</p>
-    <button class="btn btn-outline-dark">Create Courses</button>
-    <button class="btn btn-outline-dark">Assign Courses</button>
-    <button class="btn btn-outline-dark">View Student Reports</button>
-</div>
+    <!--Div unlocked-->
+    <div class="divUnlocked">
+        <h5>Welcome Back</h5>
+        <p>Select a choice below to begin</p>
+        <button class="btn btn-outline-dark btnMainCreateCourse">Create Courses</button>
+        <button class="btn btn-outline-dark btnMainAssignCourse">Assign Courses</button>
+        <button class="btn btn-outline-dark btnMainViewReports">View Student Reports</button>
+    </div>
 
 
-<!--------------------------Create Course------------------------->
-<div class="divCreateCourse">
-    <h4>Create study content</h4>
-    <p>Add links to videos, PDF's and websites for course content</p>
-    <hr />
-    <!--Add links section-->
-    <div class="divLinks">
-        <input class="form-control inputWebLink1" placeholder="Full Web Address Link" />
-        <select class="form-control selectLinkType1">
-            <option selected hidden>Link Type</option>
-            <option>Video</option>
-            <option>Website</option>
-            <option>PDF</option>
-        </select>
-        <button class="btn btn-dark btnAddAnotherLink">Add Another</button>
-    </div>
-    <hr />
-    <!--Add testing questions-->
-    <h4>Create your test</h4>
-    <div class="divAddTestingQuestions">
-        <p>Question #1</p>
-        <input class="form-control inputQuestion1" placeholder="Question" />
-        <input class="form-control inputOption1Question1" placeholder="Option 1" />
-        <select class="form-control selectCorrectOrIncorrectOption1Question1">
-            <option selected>Correct</option>
-            <option>Incorrect</option>
-        </select>
-        <input class="form-control inputOption2Question1" placeholder="Option 2" />
-        <select class="form-control selectCorrectOrIncorrectOption2Question1">
-            <option selected>Correct</option>
-            <option>Incorrect</option>
-        </select>
-        <input class="form-control inputOption3Question1" placeholder="Option 3" />
-        <select class="form-control selectCorrectOrIncorrectOption3Question1">
-            <option selected>Correct</option>
-            <option>Incorrect</option>
-        </select>
-        <input class="form-control inputOption4Question1" placeholder="Option 4" />
-        <select class="form-control selectCorrectOrIncorrectOption4Question1">
-            <option selected>Correct</option>
-            <option>Incorrect</option>
-        </select>
-        <button class="btn btn-dark btnAddAnotherQuestion">Add Another</button>
-    </div>
-    <!--Add course difficulty rating-->
-    <hr />
-    <div class="divCourseDifficultyRating">
-        <h4>Course difficulty rating</h4>
-        <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Novice</button>
-        <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Advanced Beginner</button>
-        <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Competent</button>
-        <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Proficient</button>
-        <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Expert</button>
-    </div>
-    <!--Add course name-->
-    <div class="divCourseName">
+    <!--------------------------Create Course------------------------->
+    <div class="divCreateCourse">
+        <h4>Create study content</h4>
+        <p>Add links to videos, PDF's and websites for course content</p>
         <hr />
-        <h4>Course Name</h4>
-        <input class="form-control inputCourseName" placeholder="Course Name" />
-        <button class="btn btn-primary btnSubmitNewCourseForm">Submit Course</button>
+        <!--Add links section-->
+        <div class="divLinks">
+            <input class="form-control inputWebLink1" placeholder="Full Web Address Link" />
+            <select class="form-control selectLinkType1">
+                <option selected hidden>Link Type</option>
+                <option>Video</option>
+                <option>Website</option>
+                <option>PDF</option>
+            </select>
+            <button class="btn btn-dark btnAddAnotherLink">Add Another</button>
+        </div>
+        <hr />
+        <!--Add testing questions-->
+        <h4>Create your test</h4>
+        <div class="divAddTestingQuestions">
+            <p>Question #1</p>
+            <input class="form-control inputQuestion1" placeholder="Question" />
+            <input class="form-control inputOption1Question1" placeholder="Option 1" />
+            <select class="form-control selectCorrectOrIncorrectOption1Question1">
+                <option selected>Correct</option>
+                <option>Incorrect</option>
+            </select>
+            <input class="form-control inputOption2Question1" placeholder="Option 2" />
+            <select class="form-control selectCorrectOrIncorrectOption2Question1">
+                <option selected>Correct</option>
+                <option>Incorrect</option>
+            </select>
+            <input class="form-control inputOption3Question1" placeholder="Option 3" />
+            <select class="form-control selectCorrectOrIncorrectOption3Question1">
+                <option selected>Correct</option>
+                <option>Incorrect</option>
+            </select>
+            <input class="form-control inputOption4Question1" placeholder="Option 4" />
+            <select class="form-control selectCorrectOrIncorrectOption4Question1">
+                <option selected>Correct</option>
+                <option>Incorrect</option>
+            </select>
+            <button class="btn btn-dark btnAddAnotherQuestion">Add Another</button>
+        </div>
+        <!--Add course difficulty rating-->
+        <hr />
+        <div class="divCourseDifficultyRating">
+            <h4>Course difficulty rating</h4>
+            <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Novice</button>
+            <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Advanced Beginner</button>
+            <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Competent</button>
+            <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Proficient</button>
+            <button class="btn btn-dark" onclick="chooseDifficultyLevel(this)">Expert</button>
+        </div>
+        <!--Add course name-->
+        <div class="divCourseName">
+            <hr />
+            <h4>Course Name</h4>
+            <input class="form-control inputCourseName" placeholder="Course Name" />
+            <button class="btn btn-primary btnSubmitNewCourseForm">Submit Course</button>
+        </div>
+        <button class="btn btn-outline-danger btnCloseCreateCourse">Previous Page</button>
     </div>
-</div>
 
 
-<!-------------------------Assign Courses------------------------->
-<div class="divStudentCourseAssigner">
-    <!--Top section-->
-    <div class="divCourseAssignerTopDivider">
-        <h5>Assign Courses</h5>
-        <p>Check who will be assigned to the selected course(s)</p>
-        @foreach (string username in Model.allUsernames)
-        {
-            <input type="checkbox" value="@username" />
-            <label>@username</label>
+    <!-------------------------Assign Courses------------------------->
+    <div class="divStudentCourseAssigner">
+        <button class="btn btn-outline-danger btnCloseAssignCourse">Previous Page</button>
+        <!--Top section-->
+        <div class="divCourseAssignerTopDivider">
+            <h5>Assign Courses</h5>
+            <p>Check who will be assigned to the selected course(s)</p>
+            @foreach (string username in Model.allUsernames)
+            {
+                <input class="assignUsernameCheckBox" type="checkbox" value="@username" />
+                <label>@username</label>
+                <span></span>
+            }
+        </div>
+        <hr />
+        <!--Bottom Section-->
+        <div class="divCourseAssignerBottomDivider">
+            <p>Check each course you would like to assign</p>
             <span></span>
-        }
+            <input class="assignCourseCheckBox" type="checkbox" value="Econ214" />
+            <label>Econ214</label>
+            <span></span>
+            <input class="assignCourseCheckBox" type="checkbox" value="NetEng101" />
+            <label>NetEng101</label>
+        </div>
+        <hr />
+        <button class="btn btn-dark btnAssignCourse">Submit</button>
     </div>
-    <hr />
-    <!--Bottom Section-->
-    <div class="divCourseAssignerBottomDivider">
-        <p>Check each course you would like to assign</p>
-        <input type="checkbox" value="CSIS483" />
-        <label>CSIS483</label>
-        <span></span>
-        <input type="checkbox" value="CSIS473" />
-        <label>CSIS473</label>
-        <span></span>
-        <input type="checkbox" value="ACCT212" />
-        <label>ACCT212</label>
+
+    <!-------------------Check Students Grades------------------------>
+    <div class="divStudentGradeChecker">
+        <h5>Student Reports</h5>
+        <p>Enter a student's username</p>
+        <input placeholder="Username" class="form-control inputStudentReportUsername" />
+        <button class="btn btn-dark btnSeachStudentReports">Search</button>
+        <hr />
+        <div class="divreportHolder">
+
+        </div>
+        <button class="btn btn-outline-danger btnCloseStudentReport">Previous Page</button>
     </div>
-    <hr />
-    <button class="btn btn-dark">Submit</button>
-</div>
 
-<!-------------------Check Students Grades------------------------>
-<div class="divStudentGradeChecker">
-    <h5>Student Reports</h5>
-    <p>Enter a student's username</p>
-    <input placeholder="Username" class="form-control" />
-    <button class="btn btn-dark btnSeachStudentReports">Search</button>
-    <hr />
-</div>
 
+}
 
 
 <!--JS FILE-->
 <script src="~/js/admin.js"></script>
-
-}

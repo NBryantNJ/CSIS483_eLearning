@@ -20,7 +20,11 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color:#1e92e6">OnBoard eTraining <img class="homeLogo" src="~/Images/homeLogo.png" /></a>
                 <div class="divLogin">
                     <p class="pLoginText">
-                        @if(Context.Session.GetString("firstname") == null) { <htInject>Login</htInject> } else { @Context.Session.GetString("firstname") <htmlInject> </htmlInject> @Context.Session.GetString("lastname"); }
+                        @if (Context.Session.GetString("firstname") == null)
+                        {<htInject>Login</htInject> }
+                        else
+                        { @Context.Session.GetString("firstname") <htmlInject> </htmlInject> @Context.Session.GetString("lastname");
+                    }
                         <img class="imgProfilePic" src="~/Images/blankProfilePic.png" />
                     </p>
                 </div>
@@ -80,6 +84,15 @@
         <button class="btn btn-info popUpNewUserBtn">New User?</button>
     </div>
 
+    <!-------------------Logout Div-------------------------->
+    <div class="divLogout">
+        <h5>OnBoard eTraining Logout</h5>
+        <p>Please select an option</p>
+        <button class="btn btn-outline-danger btnLogout">Logout</button>
+        <button class="btn btn-outline-dark btnLogoutCancel">Cancel</button>
+        <img src="~/Images/loading.gif" />
+    </div>
+
     <script>
         //Mutli Purpose Functions
         //Turn dimmer on
@@ -92,16 +105,24 @@
         $(".divLogin").on('click', function ()
         {
             //If user not logged in
-            @if(Context.Session.GetString("firstname") == null)
-            { 
+            @if (Context.Session.GetString("firstname") == null)
+            {
                 <text>
                     callDimmer();
                     $(".divPopUpLoginForm").css("visibility", "visible");
                     $(".divPopUpLoginForm").css("opacity", "1");
                 </text>
             }
+            else
+            {
+                <text>
+                    callDimmer();
+                    $(".divLogout").css("visibility", "visible");
+                    $(".divLogout").css("opacity", "1");
+                </text>
+            }
         });
-       
+
         //-----------Pop up login form-------------
         //New User clicked
         $(".popUpNewUserBtn").on('click', function () {
@@ -113,8 +134,8 @@
         $(".btnUserLogin").on('click', function ()
         {
             //Send login data
-            var username = $(".inputLoginUsername").val(); 
-            var password = $(".inputLoginPassword").val(); 
+            var username = $(".inputLoginUsername").val();
+            var password = $(".inputLoginPassword").val();
             $.post("/home/loginExistingUser", { username: username, password: password, captcha: grecaptcha.getResponse()}, function success(data) {
                 if (data === "true") {
                     location.reload();
@@ -124,6 +145,28 @@
                 }
             });
 
+        });
+
+        //Logout cancel button clicked
+        $(".btnLogoutCancel").on('click', function () {
+            $(".divLogout").css("visibility", "hidden");
+            $(".divLogout").css("opacity", "0");
+            $(".divDimmer").css("visibility", "hidden");
+            $(".divDimmer").css("opacity", "0");
+        });
+
+        //Logout button clicked
+        $(".btnLogout").on('click', function ()
+        {
+            $(".divLogout img").css("visibility", "visible");
+            $(".divLogout .btnLogout").text("");
+            $(".divLogout .btnLogout").css("height", "38px");
+            setTimeout(function ()
+            {
+                $.post("/home/logout", {}, function success(data) {
+                    window.location.reload();
+                });
+            },1500);
         });
     </script>
 

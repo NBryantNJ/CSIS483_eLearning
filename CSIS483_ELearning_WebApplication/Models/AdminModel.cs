@@ -8,6 +8,7 @@ namespace CSIS483_ELearning_WebApplication.Models
     public class AdminModel
     {
         public bool doesUserHaveAdminPrivileges { get; set; }
+        public bool didUserRequestAdminPrivileges { get; set; }
         public List<string> allUsernames { get; set;  }
         public List<string> allCourseNames { get; set; }
     }

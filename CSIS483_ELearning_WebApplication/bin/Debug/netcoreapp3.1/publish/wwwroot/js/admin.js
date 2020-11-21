@@ -1,7 +1,24 @@
 ﻿
 
+//------------------------Locked Screen-----------------------------
+
+//request for admin privileges button clicked
+$('.btnRequestAdminAccess').on('click', function ()
+{
+    $.post("/home/requestAdminPrivileges", { didUserRequestAccess: true }, function success(data)
+    {
+        if (data === true) {
+            window.location.reload(); 
+        }
+    });
+});
+
 
 /*------------------------Create course form----------------------*/
+//Main create course button clicked
+$(".btnMainCreateCourse").on('click', function () {
+    $(".divCreateCourse").css('visibility', 'visible');
+});
 
 //Add another link button clicked
 var numOfLinks = 1; 
@@ -89,15 +106,98 @@ $(".btnSubmitNewCourseForm").on('click', function () {
 });
 
 
- //public int numberOfLinks { get; set; }
- //       public string link { get; set; }
- //       public string linkType { get; set; }
- //       public int numberOfQuestions { get; set; }
- //       public string question { get; set; }
- //       public string option1 { get; set; }
- //       public string option2 { get; set; }
- //       public string option3 { get; set; }
- //       public string option4 { get; set; }
-//                       isOptionCorrectOrIncorrect
- //       public string difficultyRating { get; set; }
- //       public string courseName { get; set; }
+/*-------------------------------Assign courses----------------------------------*/
+//Main assign course button clicked
+$(".btnMainAssignCourse").on('click', function () {
+    $(".divStudentCourseAssigner").css('visibility', 'visible');
+});
+
+
+$(".btnAssignCourse").on('click', function ()
+{
+
+    //Get values of all checked usernames
+    var indexNum = 0;
+    var allCheckedValuesObject = {}; 
+    $(".assignUsernameCheckBox").each(function () {
+        if ($(this).is(':checked')) {
+            allCheckedValuesObject[indexNum] = { user: $(this).val() };
+            indexNum++;
+        }
+    });
+
+    //Get value of all checked courses
+    $(".assignCourseCheckBox").each(function () {
+        if ($(this).is(':checked')) {
+            allCheckedValuesObject[indexNum] = { course: $(this).val() };
+            indexNum++;
+        }
+    });
+
+    //Send to controller
+    $.post("/home/assignCoursesToUsers", { assigncoursemodel: allCheckedValuesObject }, function success(data) { alert("done"); });
+});
+
+/*-----------------------Get user report---------------------------*/
+//Main report button clicked
+$(".btnMainViewReports").on('click', function () {
+    $(".divStudentGradeChecker").css('visibility', 'visible');
+});
+
+$(".btnSeachStudentReports").on('click', function () {
+
+    $.post("/home/retreieveUsersReport", { username: $(".inputStudentReportUsername").val() }, function success(data)
+    {
+        $(".divreportHolder").empty();
+        var tag;
+        //If no results for username
+        if (data.length === 0) {
+            tag = "<p>Sorry, this user has no records.</p>";
+            $(tag).appendTo($(".divreportHolder"));
+        }
+        //If results
+        else
+        {
+            var iterator = 0;
+            tag = "<table>";
+            tag += "<tr>";
+            tag += "<th>Course Name</th>";
+            tag += "<th>Assigned By</th>";
+            tag += "<th>Date assigned</th>";
+            tag += "<th>Date taken</th>";
+            tag += "<th>Grade</th>";
+            tag += "</tr>";
+            $(data).each(function () {
+                tag += "<tr>";
+
+                tag += "<td>" + data[iterator].courseName + "</td>";
+                tag += "<td>" + data[iterator].assignedBy + "</td>";
+                tag += "<td>" + data[iterator].dateAssigned + "</td>";
+                tag += "<td>" + data[iterator].dateTaken + "</td>";
+                tag += "<td>" + data[iterator].grade + "</td>";
+
+                tag += "</tr>";
+
+                iterator++;
+            });
+            tag += "</table>";
+            $(tag).appendTo($(".divreportHolder"));
+        }
+
+    });
+});
+
+//----------------------------close all pages buttons-----------------------
+$(".btnCloseStudentReport").on('click', function () {
+    $(".divStudentGradeChecker").css("visibility", "hidden");
+});
+
+
+$(".btnCloseAssignCourse").on('click', function () {
+    $(".divStudentCourseAssigner").css("visibility", "hidden");
+});
+
+
+$(".btnCloseCreateCourse").on('click', function () {
+    $(".divCreateCourse").css("visibility", "hidden");
+});

@@ -34,3 +34,41 @@
     cursor:pointer; 
     opacity:.9;
 }
+
+/*Logged in but no courses assigned div*/
+.divLoggedInButNoCoursesAssigned {
+    position: relative;
+    top: 50px;
+    left: 50%;
+    width: 900px;
+    height: 300px;
+    transform: translate(-50%);
+    background-color: white;
+    padding: 95px;
+    text-align: center;
+    box-shadow: 0px 2px 2px #aaa;
+}
+
+.divLoggedInButNoCoursesAssigned p
+{
+    padding-top:30px; 
+}
+
+/*Not logged in div*/
+.divNotLoggedIn {
+    position: relative;
+    top: 50px;
+    left: 50%;
+    width: 900px;
+    height: 300px;
+    transform: translate(-50%);
+    background-color: white;
+    padding: 60px;
+    text-align: center;
+    box-shadow: 0px 2px 2px #aaa;
+}
+
+.divNotLoggedIn button
+{
+    position:relative; top:50px!important; left:0px!important; width:200px!important;
+}

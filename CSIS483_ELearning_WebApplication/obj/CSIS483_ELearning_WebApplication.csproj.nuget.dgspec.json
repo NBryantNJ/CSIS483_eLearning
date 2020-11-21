@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj": {}
+    "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj": {}
   },
   "projects": {
-    "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj": {
+    "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
+        "projectUniqueName": "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
         "projectName": "CSIS483_ELearning_WebApplication",
-        "projectPath": "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
+        "projectPath": "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
         "packagesPath": "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\",
-        "outputPath": "E:\\NicksSoftwareProjects\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\obj\\",
+        "outputPath": "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

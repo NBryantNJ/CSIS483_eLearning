@@ -1,30 +1,50 @@
-﻿@{
+﻿@model List<CSIS483_ELearning_WebApplication.Models.getAssignedCoursesModel>
+@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Http;
 
 <head>
     <!--CSS files-->
     <link href="~/css/home.css/IndexLarge.css" rel="stylesheet" />
 </head>
 
+@if (Context.Session.GetString("username") != null) //If user is logged in
+{
+    //If user is logged in and has courses assigned
+    if (Model.Count > 0)
+    {
+        <text>
+            <div class="welcomeDiv">
+                <h3>Welcome Back</h3>
+                <p>Select a course below to begin</p>
+            </div>
+        </text>
+        for (int i = 0; i < Model.Count; i++)
+        {
+            <text>
+                <div class="homeDivs">
+                    <h3>@Model[i].courseID</h3>
+                    <p>Assigned By: @Model[i].assignedByID</p>
+                </div>
+            </text>
+        }
 
-
-<div class="welcomeDiv">
-    <h3>Welcome Back</h3>
-    <p>Select a course below to begin</p>
-</div>
-
-<div class="homeDivs">
-    <h3>COMPTIA A+</h3>
-    <p>Score 0%</p>
-</div>
-
-<div class="homeDivs">
-    <h3>Software - C#</h3>
-    <p>Score 80%</p>
-</div>
-
-<div class="homeDivs">
-    <h3>Network Engineering Basics</h3>
-    <p>Score 92%</p>
-</div>
+    }
+    //If user is logged in but has no reports
+    else
+    {
+        <div class="divLoggedInButNoCoursesAssigned">
+            <h5>No assigned courses</h5>
+            <p>You have no new assigned courses</p>
+        </div>
+    }
+}
+else
+{
+    <div class="divNotLoggedIn">
+        <h5>No courses available</h5>
+        <p>Please login to see your assigned courses.</p>
+        <button class="btn btn-dark divLogin">Login</button>
+    </div>
+}

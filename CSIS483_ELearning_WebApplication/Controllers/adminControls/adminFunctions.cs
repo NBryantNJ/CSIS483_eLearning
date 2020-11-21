@@ -20,10 +20,12 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
         }
 
         //-------------------------------Check if user has admin priveleges ----------------------------
-        public bool checkAdminPrivileges(string username, string password)
+        public AdminModel checkAdminPrivileges(string username, string password)
         {
             try
             {
+                //variable
+                AdminModel adminmodel = new AdminModel(); 
                 //Get Connection String
                 var configuration = GetConfiguration();
                 string connectionString = configuration.GetConnectionString("AWSMAINDB");
@@ -40,12 +42,28 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
                     //Check users admin privileges
                     while(reader.Read())
                     {
+                        //Check access
                         if(reader["adminPrivileges"].ToString() == "true")
                         {
-                            return true; 
+                            adminmodel.doesUserHaveAdminPrivileges = true; 
                         }
+                        else
+                        {
+                            adminmodel.doesUserHaveAdminPrivileges = false; 
+                        }
+
+                        //Check if requested access
+                        if(reader["didUserRequestPrivileges"].ToString() == "true")
+                        {
+                            adminmodel.didUserRequestAdminPrivileges = true;
+                        }
+                        else
+                        {
+                            adminmodel.didUserRequestAdminPrivileges = false;
+                        }
+
                     }
-                    return false; 
+                    return adminmodel; 
                 }
             }
             catch(Exception e)
@@ -53,10 +71,46 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
                 //If error email the developer
                 EmailErrors emailerrors = new EmailErrors();
                 emailerrors.autoEmailDeveloperAboutIssue("Admin Functions", "checkAdminPrileges", e.ToString());
-                return false; 
+                return null; 
             }
         }
 
+
+        //----------------------------User requested access-----------------------------------
+        public bool requestAdminPrivileges(bool didUserRequestAccess, string username, string password)
+        {
+                try
+                {
+                    if (didUserRequestAccess == true)
+                    {
+                        //Get Connection String
+                        var configuration = GetConfiguration();
+                        string connectionString = configuration.GetConnectionString("AWSMAINDB");
+
+                        //Update table that user requested access
+                        using (MySqlConnection conn = new MySqlConnection(connectionString))
+                        {
+                            conn.Open();
+                            MySqlCommand cmd = new MySqlCommand("UPDATE loginTable SET didUserRequestPrivileges = 'true' WHERE username = @username AND usersPassword = @usersPassword", conn);
+                            cmd.Parameters.Add("@username", MySqlDbType.VarChar).Value = username;
+                            cmd.Parameters.Add("usersPassword", MySqlDbType.VarChar).Value = password;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false; 
+                    }
+                }
+            catch(Exception e)
+            {
+                EmailErrors errors = new EmailErrors();
+                errors.autoEmailDeveloperAboutIssue("adminFunction.cs", "requestAdminPrivileges", e.ToString());
+                return false; 
+            }
+        }
 
         //----------------------------Get usernames of all users-------------------------------
         public List<string> getAllUsernames()
@@ -178,19 +232,27 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
 
                 //Insert Questions
                 iterator = 0;
-                //foreach (string question in questions)
-                //{
-                //    using (MySqlConnection conn = new MySqlConnection(connectionString))
-                //    {
-                //        conn.Open();
-                //        MySqlCommand cmd = new MySqlCommand("INSERT INTO coursesContentTable (testID, linkAddress, linkType) VALUES (@testID ,@linkAddress, @linkType) ", conn);
-                //        cmd.Parameters.Add("@testID", MySqlDbType.VarChar).Value = createACourseModel[2].courseName;
-                //        cmd.Parameters.Add("@linkAddress", MySqlDbType.VarChar).Value = link;
-                //        cmd.Parameters.Add("@linkType", MySqlDbType.VarChar).Value = linkTypes[iterator];
-                //        cmd.ExecuteNonQuery();
-                //        iterator++;
-                //    }
-                //}
+                foreach (string question in questions)
+                {
+                    using (MySqlConnection conn = new MySqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO coursesTestQuestionsTable (testID, questionNumber, question, answerOption1, answerOption2, answerOption3, answerOption4, isAnswerOption1Correct, isAnswerOption2Correct, isAnswerOption3Correct, isAnswerOption4Correct) VALUES (@testID ,@questionNumber, @question, @answerOption1, @answerOption2, @answerOption3, @answerOption4, @isAnswerOption1Correct, @isAnswerOption2Correct, @isAnswerOption3Correct, @isAnswerOption4Correct) ", conn);
+                        cmd.Parameters.Add("@testID", MySqlDbType.VarChar).Value = createACourseModel[2].courseName;
+                        cmd.Parameters.Add("@questionNumber", MySqlDbType.VarChar).Value = iterator + 1;
+                        cmd.Parameters.Add("@question", MySqlDbType.VarChar).Value = question;
+                        cmd.Parameters.Add("@answerOption1", MySqlDbType.VarChar).Value = option1[iterator];
+                        cmd.Parameters.Add("@answerOption2", MySqlDbType.VarChar).Value = option2[iterator];
+                        cmd.Parameters.Add("@answerOption3", MySqlDbType.VarChar).Value = option3[iterator];
+                        cmd.Parameters.Add("@answerOption4", MySqlDbType.VarChar).Value = option4[iterator];
+                        cmd.Parameters.Add("@isAnswerOption1Correct", MySqlDbType.VarChar).Value = isOption1Correct[iterator];
+                        cmd.Parameters.Add("@isAnswerOption2Correct", MySqlDbType.VarChar).Value = isOption2Correct[iterator];
+                        cmd.Parameters.Add("@isAnswerOption3Correct", MySqlDbType.VarChar).Value = isOption3Correct[iterator];
+                        cmd.Parameters.Add("@isAnswerOption4Correct", MySqlDbType.VarChar).Value = isOption4Correct[iterator];
+                        cmd.ExecuteNonQuery();
+                        iterator++;
+                    }
+                }
 
                 return true;
             }
@@ -203,11 +265,145 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
         }
 
 
+        //---------------------------Assign Courses---------------------------------------
+        public bool assignCourses(assignCourseModel[] assigncoursesmodel)
+        {
+            try
+            {
+                //Get Connection String
+                var configuration = GetConfiguration();
+                string connectionString = configuration.GetConnectionString("AWSMAINDB");
+
+                //create variables
+                List<string> users = new List<string>();
+                List<string> courses = new List<string>(); 
+
+                //Populate variables
+                foreach(assignCourseModel objectModel in assigncoursesmodel)
+                {
+                    if(objectModel.user != null)
+                    {
+                        users.Add(objectModel.user); 
+                    }
+                    if(objectModel.course != null)
+                    {
+                        courses.Add(objectModel.course); 
+                    }
+                }
+
+                //Push data to database
+                foreach (string user in users)
+                {
+                    foreach (string course in courses)
+                    {
+                        //Create security verification variable.
+                        bool isOkToAssignCourse = true;
+
+
+
+                        using (MySqlConnection conn = new MySqlConnection(connectionString))
+                        {
+                            conn.Open();
+                       
+                            //Verify user exists
+                            MySqlCommand cmd1 = new MySqlCommand("SELECT COUNT(*) FROM loginTable WHERE username = @username",conn);
+                            cmd1.Parameters.Add("@username", MySqlDbType.VarChar).Value = user; 
+                            if(int.Parse(cmd1.ExecuteScalar().ToString()) != 1)
+                            {
+                                isOkToAssignCourse = false; 
+                            }
+                            
+                            //Verify course exists
+                            MySqlCommand cmd2 = new MySqlCommand("SELECT COUNT(*) FROM coursesTable WHERE courseTitle = @courseTitle", conn);
+                            cmd2.Parameters.Add("@courseTitle", MySqlDbType.VarChar).Value = course;
+                            if (int.Parse(cmd2.ExecuteScalar().ToString()) != 1)
+                            {
+                                isOkToAssignCourse = false;
+                            }
+                          
+                            //Check user isn't already assigned to course
+                            MySqlCommand cmd3 = new MySqlCommand("SELECT COUNT(*) FROM assignedCoursesTable WHERE assignedToID = @assignedToID AND courseID = @courseID", conn);
+                            cmd3.Parameters.Add("@assignedToID", MySqlDbType.VarChar).Value = user;
+                            cmd3.Parameters.Add("@courseID", MySqlDbType.VarChar).Value = course; 
+                            if (int.Parse(cmd3.ExecuteScalar().ToString()) > 0)
+                            {
+                                isOkToAssignCourse = false;
+                            }
+
+                            //If all verification checks pass assign course to user
+                            if (isOkToAssignCourse == true)
+                            {
+                                    MySqlCommand cmd4 = new MySqlCommand("INSERT INTO assignedCoursesTable (assignedByID, assignedToID, courseID) VALUES (@assignedByID, @assignedToID, @courseID)", conn);
+                                    cmd4.Parameters.Add("@assignedByID", MySqlDbType.VarChar).Value = "fname and lname"; /*This has to be changed*/
+                                    cmd4.Parameters.Add("@assignedToID", MySqlDbType.VarChar).Value = user;
+                                    cmd4.Parameters.Add("@courseID", MySqlDbType.VarChar).Value = course;
+                                    cmd4.ExecuteNonQuery();
+                            }
+
+                        }
 
 
 
 
+                    }
+                }
 
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                EmailErrors emailerrors = new EmailErrors();
+                emailerrors.autoEmailDeveloperAboutIssue("adminFunction.cs", "assignCourses", e.ToString());
+                return false;
+            }
+
+        }
+
+
+        //--------------------------Retrieve users report-----------------------
+        public List<RetrieveUsersReportModel> retrieveUsersReport(string username)
+        {
+            //Get Connection String
+            var configuration = GetConfiguration();
+            string connectionString = configuration.GetConnectionString("AWSMAINDB");
+
+            //Declare variables
+            List<RetrieveUsersReportModel> retrieveUsersReportModel = new List<RetrieveUsersReportModel>(); 
+
+            //Open Sql connection
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM testScoringTable WHERE LOWER(assignedTo) = @assignedTo", conn);
+                    cmd.Parameters.Add("@assignedTo", MySqlDbType.VarChar).Value = username.ToLower();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    //Populate variables
+                    while (reader.Read())
+                    {
+                        retrieveUsersReportModel.Add(new RetrieveUsersReportModel
+                        {
+                            courseName = reader["courseName"].ToString(),
+                            assignedBy = reader["assignedBy"].ToString(),
+                            dateAssigned = reader["dateAssigned"].ToString(),
+                            dateTaken = reader["dateTaken"].ToString(),
+                            grade = (int.Parse(reader["grade"].ToString()))
+                        });
+                    }
+
+                    return retrieveUsersReportModel;
+                }
+                catch(Exception e)
+                {
+                    EmailErrors error = new EmailErrors();
+                    error.autoEmailDeveloperAboutIssue("adminFunctions.cs", "retrieveUserReports", e.ToString()); 
+                    return null; 
+                }
+            }
+        }
 
 
     }
