@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8T+V8yVGyDBBut8IHBED+CfzvM2tGaV7akmjS6nOZtSX5/eSxY0xgcgtxVjs7Y6zH2KbOGf7ujHUeq1ZpSsBrQ==",
+  "dgSpecHash": "U/1CszHQdZ7WJkPN+ODtYsPMnncbmty1TUdDb9VbH6X7vE/c4O8FHCIMLGW1CAhfmcbaxCy4ZX0dz+d3HNrScA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nicholas Bryant\\source\\repos\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication\\CSIS483_ELearning_WebApplication.csproj",
   "expectedPackageFiles": [
@@ -129,7 +129,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\webapicontrib.formatting.javascriptserializer\\0.9.4\\webapicontrib.formatting.javascriptserializer.0.9.4.nupkg.sha512"
+    "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\webapicontrib.formatting.javascriptserializer\\0.9.4\\webapicontrib.formatting.javascriptserializer.0.9.4.nupkg.sha512",
+    "C:\\Users\\Nicholas Bryant\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\3.1.6\\microsoft.netcore.app.host.linux-x64.3.1.6.nupkg.sha512"
   ],
   "logs": [
     {

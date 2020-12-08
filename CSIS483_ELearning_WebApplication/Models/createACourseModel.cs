@@ -22,5 +22,6 @@ namespace CSIS483_ELearning_WebApplication.Models
         public string isOptionCorrectOrIncorrect4 { get; set; }
         public string difficultyRating { get; set; }
         public string courseName { get; set; }
+        public string notes { get; set; }
     }
 }

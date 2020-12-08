@@ -107,8 +107,13 @@ else
             <hr />
             <h4>Course Name</h4>
             <input class="form-control inputCourseName" placeholder="Course Name" />
-            <button class="btn btn-primary btnSubmitNewCourseForm">Submit Course</button>
         </div>
+        <!--Add notes-->
+        <div class="divAddNotes">
+            <h4>Add Notes</h4>
+            <textarea class="form-control textareaAddNotes"></textarea>
+        </div>
+         <button class="btn btn-primary btnSubmitNewCourseForm">Submit Course</button>
         <button class="btn btn-outline-danger btnCloseCreateCourse">Previous Page</button>
     </div>
 
@@ -131,12 +136,12 @@ else
         <!--Bottom Section-->
         <div class="divCourseAssignerBottomDivider">
             <p>Check each course you would like to assign</p>
-            <span></span>
-            <input class="assignCourseCheckBox" type="checkbox" value="Econ214" />
-            <label>Econ214</label>
-            <span></span>
-            <input class="assignCourseCheckBox" type="checkbox" value="NetEng101" />
-            <label>NetEng101</label>
+            @foreach (string existingCourseName in Model.allCourseNames)
+            {
+                <span></span>
+                <input class="assignCourseCheckBox" type="checkbox" value="@existingCourseName" />
+                <label>@existingCourseName</label>
+            }
         </div>
         <hr />
         <button class="btn btn-dark btnAssignCourse">Submit</button>

@@ -1,5 +1,6 @@
-﻿@{ 
-    ViewData["Title"] = "Course Content"; 
+﻿@model CSIS483_ELearning_WebApplication.Models.CourseContentModel
+@{
+    ViewData["Title"] = "Course Content";
 }
 
 <head>
@@ -7,26 +8,45 @@
 </head>
 
 <!--Header-->
-<div class="courseContentHeader">
-    <h3>Course: CSIS 312</h3>
-    <p>Please review the content below to prepare for your test</p>
-</div>
+<!--if Course exists-->
+@{ if (Model != null)
+    {
 
-<!--Study Content-->
+        <div class="courseContentHeader">
+            <h3>Course: @Model.courseTitle</h3>
+            <p>Please review the content below to prepare for your test</p>
+        </div>
+
+        <!--Study Content-->
 <div class="divStudyContent">
-    <h6>Difficulty Rating - Proficent</h6>
+    <h6>Difficulty Rating - @Model.difficultyRating</h6>
+
+    <!--Populate video links-->
     <h5>Videos</h5>
-    <a href="https://www.youtube.com/watch?v=2eLe7uz-7CM" target="_blank">Professer Messer - Comptia A+</a>
-    <a href="https://www.youtube.com/watch?v=2eLe7uz-7CM" target="_blank">Professer Messer - Comptia B+</a>
-    <a href="https://www.youtube.com/watch?v=2eLe7uz-7CM" target="_blank">Professer Messer - Comptia C+</a>
+    @foreach (string videoLink in Model.videoLinks)
+    {
+        <a href="@videoLink" target="_blank">@videoLink</a>
+    }
+
+    <!--Populate study links-->
     <h5>Study Links</h5>
-    <a href="https://www.gbmb.org/tb-to-mb" target="_blank">Conversion Table</a>
-    <a href="https://www.pdfdrive.com/comptia-advanced-security-practitioner-casp-cas-003-cert-guide-comptia-a-e147383629.html" target="_blank">Comptia study book</a>
-    <a href="https://www.gbmb.org/tb-to-mb" target="_blank">Conversion Table</a>
-    <a href="https://www.pdfdrive.com/comptia-advanced-security-practitioner-casp-cas-003-cert-guide-comptia-a-e147383629.html" target="_blank">Comptia study book</a>
-    <a href="https://www.gbmb.org/tb-to-mb" target="_blank">Conversion Table</a>
-    <a href="https://www.pdfdrive.com/comptia-advanced-security-practitioner-casp-cas-003-cert-guide-comptia-a-e147383629.html" target="_blank">Comptia study book</a>
+    @foreach (string pdfOrWebLink in Model.webAndPDFLinks)
+    {
+        <a href="@pdfOrWebLink" target="_blank">@pdfOrWebLink</a>
+    }
     <h5>Notes</h5>
-    <p>Study hard this test is pretty difficult. Your going to need to put in a lot of hours. Study hard this test is pretty difficult. Your going to need to put in a lot of hours.Study hard this test is pretty difficult. Your going to need to put in a lot of hours.</p>
-    <button class="btn btn-outline-dark btnTakeTest">Proceed to testing</button>
+    <p>@Model.notes</p>
+    <a href="@Url.Action("TakeTest", "Home", new { courseID = Model.courseTitle })">
+        <div class="btn btn-outline-dark btnTakeTest">Proceed to testing</div>
+    </a>
 </div>
+    }
+    else
+    {
+          
+        <div class="divStudyContent" style="height:200px; text-align:center; margin-top:100px;">
+            <h5>No course selected</h5>
+            <p>Go back to the homepage and select a course.</p>
+        </div>
+    }
+}

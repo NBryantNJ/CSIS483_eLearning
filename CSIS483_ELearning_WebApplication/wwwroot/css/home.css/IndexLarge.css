@@ -1,6 +1,11 @@
 ﻿body {
 }
 
+/*General Rules*/
+a {
+    text-decoration: none!important; /* no underline */
+}
+
 /*Welcome Div*/
 .welcomeDiv
 {
@@ -16,23 +21,30 @@
 .homeDivs {
     position: relative;
     width: 900px;
-    height: 130px;
+    height: 160px;
     left: 50%;
     transform: translate(-50%);
-    background-color: #515d65;
+    background-color: #4682B4;
     box-shadow: 0px 2px 2px #aaa;
-    border-radius: 10px;
+    border-radius: 3px;
     margin-top: 130px;
     text-align: center !important;
     color: white;
     padding: 37px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
 }
 
 .homeDivs:hover
 {
     cursor:pointer; 
     opacity:.9;
+}
+
+.homeDivs p 
+{
+    font-size:18px; 
+    margin-top:36px; 
 }
 
 /*Logged in but no courses assigned div*/

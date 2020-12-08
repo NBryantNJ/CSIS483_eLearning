@@ -112,13 +112,15 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
             }
         }
 
-        //----------------------------Get usernames of all users-------------------------------
-        public List<string> getAllUsernames()
+        //----------------------------Populate admin model-------------------------------
+        public AdminModel populateAdminModel(string username, string password)
         {
             try
             {
                 //Variables
-                List<string> allUsernames = new List<string>(); 
+                AdminModel adminmodel = new AdminModel();
+                List<string> usernames = new List<string>(); 
+                List<string> coursenames = new List<string>();
 
                 //Get Connection String
                 var configuration = GetConfiguration();
@@ -132,15 +134,32 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
                     MySqlDataReader reader = cmd.ExecuteReader(); 
                     while(reader.Read())
                     {
-                        allUsernames.Add(reader["username"].ToString()); 
+                        usernames.Add(reader["username"].ToString()); 
+                        
+                    }
+                    reader.Close(); 
+
+                    MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM coursesTable", conn);
+                    reader = cmd2.ExecuteReader(); 
+                    while(reader.Read())
+                    {
+                        coursenames.Add(reader["courseTitle"].ToString()); 
                     }
                 }
-                return allUsernames; 
+
+                //Check admin priv with existing function
+                adminmodel.didUserRequestAdminPrivileges = checkAdminPrivileges(username, password).didUserRequestAdminPrivileges;
+                adminmodel.doesUserHaveAdminPrivileges = checkAdminPrivileges(username, password).doesUserHaveAdminPrivileges;
+                //populate model with existing lists
+                adminmodel.allUsernames = usernames;
+                adminmodel.allCourseNames = coursenames; 
+                //Return model
+                return adminmodel; 
             }
             catch(Exception e)
             {
                 EmailErrors emailErrors = new EmailErrors();
-                emailErrors.autoEmailDeveloperAboutIssue("adminFunctions.cs", "getAllUsernames", e.ToString()); 
+                emailErrors.autoEmailDeveloperAboutIssue("adminFunctions.cs", "populateAdminModel", e.ToString()); 
                 return null; 
             }
         }
@@ -208,9 +227,10 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO coursesTable (courseTitle, difficultyRating) VALUES (@courseTitle,@difficultyRating) ", conn);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO coursesTable (courseTitle, difficultyRating, notes) VALUES (@courseTitle,@difficultyRating, @notes) ", conn);
                     cmd.Parameters.Add("@difficultyRating", MySqlDbType.VarChar).Value = createACourseModel[1].difficultyRating;
                     cmd.Parameters.Add("@courseTitle", MySqlDbType.VarChar).Value = createACourseModel[2].courseName;
+                    cmd.Parameters.Add("@notes", MySqlDbType.VarChar).Value = createACourseModel[3].notes;
                     cmd.ExecuteNonQuery();
                 }
 
@@ -266,7 +286,7 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
 
 
         //---------------------------Assign Courses---------------------------------------
-        public bool assignCourses(assignCourseModel[] assigncoursesmodel)
+        public bool assignCourses(assignCourseModel[] assigncoursesmodel, string adminFirstname, string adminLastname)
         {
             try
             {
@@ -333,11 +353,11 @@ namespace CSIS483_ELearning_WebApplication.Controllers.adminControls
                             //If all verification checks pass assign course to user
                             if (isOkToAssignCourse == true)
                             {
-                                    MySqlCommand cmd4 = new MySqlCommand("INSERT INTO assignedCoursesTable (assignedByID, assignedToID, courseID) VALUES (@assignedByID, @assignedToID, @courseID)", conn);
-                                    cmd4.Parameters.Add("@assignedByID", MySqlDbType.VarChar).Value = "fname and lname"; /*This has to be changed*/
-                                    cmd4.Parameters.Add("@assignedToID", MySqlDbType.VarChar).Value = user;
-                                    cmd4.Parameters.Add("@courseID", MySqlDbType.VarChar).Value = course;
-                                    cmd4.ExecuteNonQuery();
+                                MySqlCommand cmd4 = new MySqlCommand("INSERT INTO assignedCoursesTable (assignedByID, assignedToID, courseID) VALUES (@assignedByID, @assignedToID, @courseID)", conn);
+                                cmd4.Parameters.Add("@assignedByID", MySqlDbType.VarChar).Value = adminFirstname + " " + adminLastname; 
+                                cmd4.Parameters.Add("@assignedToID", MySqlDbType.VarChar).Value = user;
+                                cmd4.Parameters.Add("@courseID", MySqlDbType.VarChar).Value = course;
+                                cmd4.ExecuteNonQuery();
                             }
 
                         }

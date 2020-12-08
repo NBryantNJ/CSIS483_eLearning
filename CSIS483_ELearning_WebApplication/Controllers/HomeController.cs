@@ -69,7 +69,7 @@ namespace CSIS483_ELearning_WebApplication.Controllers
             {
                 string username = HttpContext.Session.GetString("username");
                 string password = HttpContext.Session.GetString("password");
-                adminmodel = admincontrols.checkAdminPrivileges(username, password);
+                adminmodel = admincontrols.populateAdminModel(username, password); 
 
             }
             else
@@ -77,9 +77,7 @@ namespace CSIS483_ELearning_WebApplication.Controllers
                 adminmodel.doesUserHaveAdminPrivileges = false;
                 adminmodel.didUserRequestAdminPrivileges = false;
             }
-            //Return username 
-            adminControls.adminFunctions adminfunction = new adminControls.adminFunctions();
-            adminmodel.allUsernames = adminfunction.getAllUsernames();
+
 
             return View(adminmodel);
         }
@@ -109,7 +107,7 @@ namespace CSIS483_ELearning_WebApplication.Controllers
         public bool assignCoursesToUsers(assignCourseModel[] assigncoursemodel)
         {
             adminControls.adminFunctions adminfunctions = new adminControls.adminFunctions();
-            return adminfunctions.assignCourses(assigncoursemodel);
+            return adminfunctions.assignCourses(assigncoursemodel, HttpContext.Session.GetString("firstname"), HttpContext.Session.GetString("lastname"));
         }
 
         //------------------Get users report-------------------------
@@ -223,16 +221,67 @@ namespace CSIS483_ELearning_WebApplication.Controllers
 
 
         //----------------------Course content page--------------------------------------------
-        public IActionResult CourseContent()
+        public IActionResult CourseContent(string courseID)
+        { 
+            CourseContentModel courseContentModel = new CourseContentModel();
+            if (HttpContext.Session.GetString("username") != null)
+            {
+                MiscFunctions.courseContent courseContent = new MiscFunctions.courseContent();
+                courseContentModel = courseContent.populateCourseContentModel(HttpContext.Session.GetString("username"), HttpContext.Session.GetString("password"), courseID);
+                return View(courseContentModel);
+            }
+            else
+            {
+                courseContentModel = null; 
+                return View(courseContentModel);
+            }
+        }
+
+        //---------------------Course Testing Page--------------------------------------------
+        public IActionResult TakeTest(string courseID)
+        {
+
+            //Declare variables
+            List<TakeATestModel> testModel = new List<TakeATestModel>();
+            MiscFunctions.takeATestFunctions takeTestFunctions = new MiscFunctions.takeATestFunctions(); 
+
+            //Populate variable if user is logged in and course is selected
+            if (HttpContext.Session.GetString("username") != null && courseID != null)
+            {
+                testModel = takeTestFunctions.getTestQuestions(HttpContext.Session.GetString("username"), HttpContext.Session.GetString("password"), courseID);
+                return View(testModel); 
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        //Grade test
+        public string gradeTest(string[] answers, string courseID)
+        {
+
+            if (HttpContext.Session.GetString("username") != null)
+            {
+                string username = HttpContext.Session.GetString("username");
+                string password = HttpContext.Session.GetString("password");
+                MiscFunctions.takeATestFunctions takeATestFunctions = new MiscFunctions.takeATestFunctions();
+                return takeATestFunctions.gradeTest(username, password, courseID, answers);
+            }
+            else
+            {
+                return "didn't get passed home controller"; 
+            }
+        }
+
+
+
+        //----------------------References-----------------------------------------------------
+        public IActionResult References()
         {
             return View(); 
         }
 
-        //---------------------Course Testing Page--------------------------------------------
-        public IActionResult TakeTest()
-        {
-            return View(); 
-        }
 
         //----------------------Shared Layout Functions----------------------------------------
         //Captcha Global

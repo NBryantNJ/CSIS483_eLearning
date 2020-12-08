@@ -833,3 +833,4 @@ E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebA
 E:\NicksSoftwareProjects\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\CSIS483_ELearning_WebApplication.genruntimeconfig.cache
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\courseContent.cshtml.g.cs
 C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\TakeTest.cshtml.g.cs
+C:\Users\Nicholas Bryant\source\repos\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\CSIS483_ELearning_WebApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\References.cshtml.g.cs

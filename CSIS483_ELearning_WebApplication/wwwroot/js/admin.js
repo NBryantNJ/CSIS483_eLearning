@@ -62,6 +62,7 @@ function chooseDifficultyLevel(currentButton) {
 $(".btnSubmitNewCourseForm").on('click', function () {
     var createcoursemodel = {};
     var indexNum = 0;
+
     //Index 0 holds number of links and questions
     createcoursemodel[indexNum] = { numberOfLinks: numOfLinks, numberOfQuestions: numOfQuestions };
     indexNum++; 
@@ -73,6 +74,10 @@ $(".btnSubmitNewCourseForm").on('click', function () {
     //Index 2 holds course name
     createcoursemodel[indexNum] = { courseName: $(".inputCourseName").val() };
     indexNum++;
+
+    //Index 3 holds course notes
+    createcoursemodel[indexNum] = { notes: $(".textareaAddNotes").val() }; 
+    indexNum++; 
 
     //Populate links and link types
     for (var i = 1; i <= numOfLinks; i++) {

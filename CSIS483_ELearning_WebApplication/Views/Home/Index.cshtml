@@ -9,6 +9,7 @@
     <link href="~/css/home.css/IndexLarge.css" rel="stylesheet" />
 </head>
 
+
 @if (Context.Session.GetString("username") != null) //If user is logged in
 {
     //If user is logged in and has courses assigned
@@ -23,10 +24,12 @@
         for (int i = 0; i < Model.Count; i++)
         {
             <text>
-                <div class="homeDivs">
-                    <h3>@Model[i].courseID</h3>
-                    <p>Assigned By: @Model[i].assignedByID</p>
-                </div>
+                <a href="@Url.Action("CourseContent", "Home", new { courseID = Model[i].courseID })">
+                    <div class="homeDivs">
+                        <h3>@Model[i].courseID</h3>
+                        <p>Assigned By: @Model[i].assignedByID</p>
+                    </div>
+                </a>
             </text>
         }
 
